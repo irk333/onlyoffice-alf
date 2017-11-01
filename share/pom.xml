@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.anarchy.alfresco</groupId>
+		<artifactId>onlyoffice-main</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<properties>
+		<alfresco.version>${alfresco.share.version}</alfresco.version>
+	</properties>	
+	<packaging>jar</packaging>
+	<artifactId>onlyoffice-share</artifactId>
+	<name>onlyoffice-share</name>
+	<description>onlyoffice-share</description>
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<property>
+					<name>profile</name>
+					<value>dev</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<phase>install</phase>
+								<configuration>
+									<tasks>
+										<delete>
+											<fileset dir="${alfresco.server.path}/modules/share/"
+												includes="**/${project.artifactId}.*" />
+										</delete>
+										<copy file="${project.build.directory}/${project.artifactId}.jar"
+											todir="${alfresco.server.path}/modules/share/" />
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<files>
+						<file>../${profile}.properties</file>
+					</files>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+
+		<dependency>
+			<groupId>${alfresco.groupId}</groupId>
+			<artifactId>share</artifactId>
+			<classifier>classes</classifier>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+</project>  

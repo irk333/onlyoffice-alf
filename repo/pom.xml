@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>net.anarchy.alfresco</groupId>
+		<artifactId>onlyoffice-main</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+	<packaging>jar</packaging>
+	<artifactId>onlyoffice-repo</artifactId>
+	<name>onlyoffice-repo</name>
+	<description>onlyoffice-repo</description>
+
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<property>
+					<name>profile</name>
+					<value>dev</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>2</id>
+								<phase>install</phase>
+								<configuration>
+									<tasks>
+										<delete>
+											<fileset dir="${alfresco.server.path}${repo.deploy.path}"
+												includes="**/${project.artifactId}.*" />
+										</delete>
+										<copy file="${project.build.directory}/${project.artifactId}.jar"
+											todir="${alfresco.server.path}${repo.deploy.path}" />
+									</tasks>
+								</configuration>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.4.2</version>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>properties-maven-plugin</artifactId>
+				<version>1.0-alpha-2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>read-project-properties</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<files>
+						<file>../${profile}.properties</file>
+					</files>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>${alfresco.groupId}</groupId>
+			<artifactId>alfresco-repository</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		
+	</dependencies>
+</project>  
