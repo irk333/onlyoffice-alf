@@ -1,0 +1,6 @@
+<webscript>
+    <shortname>ONLYOFFICE Prepare URL</shortname>
+    <description>Sends information to Share to prepare the ONLYOFFICE Edit Page</description>
+    <url>/anarchy/onlyoffice/prepare</url>
+    <authentication>user</authentication>
+</webscript>
