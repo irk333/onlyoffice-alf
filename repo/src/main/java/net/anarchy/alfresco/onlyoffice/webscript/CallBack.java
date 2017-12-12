@@ -77,23 +77,23 @@ public class CallBack extends AbstractWebScript {
 	                if(lockService.getLockStatus(nodeRef).equals(LockStatus.NO_LOCK)) {
 	                    logger.debug("Document open for editing, locking document");
 	                    behaviourFilter.disableBehaviour(nodeRef);
-	                    lockService.lock(nodeRef, LockType.WRITE_LOCK);
+//	                    lockService.lock(nodeRef, LockType.WRITE_LOCK);
 	                } else {
 	                    logger.debug("Document already locked, another user has entered/exited");
 	                }
 	                break;
 	            case 2:
 	                logger.debug("Document Updated, changing content");
-	                lockService.unlock(nodeRef);
+//	                lockService.unlock(nodeRef);
 	                updateNode(nodeRef, callBackJSon.getString("url"));
 	                break;
 	            case 3:
 	                logger.error("ONLYOFFICE has reported that saving the document has failed");
-	                lockService.unlock(nodeRef);
+//	                lockService.unlock(nodeRef);
 	                break;
 	            case 4:
 	                logger.debug("No document updates, unlocking node");
-	                lockService.unlock(nodeRef);
+//	                lockService.unlock(nodeRef);
 	                break;
 	        }
 	
