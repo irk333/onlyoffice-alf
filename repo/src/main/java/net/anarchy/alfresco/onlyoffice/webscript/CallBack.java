@@ -74,13 +74,13 @@ public class CallBack extends AbstractWebScript {
 	                //lockService.unlock(nodeRef);
 	                break;
 	            case 1:
-	                if(lockService.getLockStatus(nodeRef).equals(LockStatus.NO_LOCK)) {
+//	                if(lockService.getLockStatus(nodeRef).equals(LockStatus.NO_LOCK)) {
 	                    logger.debug("Document open for editing, locking document");
 	                    behaviourFilter.disableBehaviour(nodeRef);
 //	                    lockService.lock(nodeRef, LockType.WRITE_LOCK);
-	                } else {
-	                    logger.debug("Document already locked, another user has entered/exited");
-	                }
+//	                } else {
+//	                    logger.debug("Document already locked, another user has entered/exited");
+//	                }
 	                break;
 	            case 2:
 	                logger.debug("Document Updated, changing content");

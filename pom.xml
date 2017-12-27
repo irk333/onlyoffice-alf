@@ -36,7 +36,7 @@
 			picked in src/test/properties for embedded run, defaults to the 'local' environment. 
 			See SDK Parent POM for more info. <env>local</env> -->
 
-		<repo.deploy.path>/tomcat/webapps/alfresco/WEB-INF/lib/</repo.deploy.path>			
+		<repo.deploy.path>/modules/platform</repo.deploy.path>			
 	</properties>
 
 	<profiles>

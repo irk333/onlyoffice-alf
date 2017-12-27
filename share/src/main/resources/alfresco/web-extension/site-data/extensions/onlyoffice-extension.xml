@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension>
+  <modules>
+  
+    <module>
+      <id>Onlyoffice-config</id>
+      <version>${project.version}</version>
+      <auto-deploy>true</auto-deploy>
+      <configurations>
+         	<config evaluator="string-compare" condition="WebFramework" replace="false">   
+			      <web-framework>
+				      <dojo-pages>
+				  <!-- This indicates that Dojo page support is on - this means that the Dojo
+				       dependency handler bean will be checked by the ResourceController and that
+				       the relevant FreeMarker directives will be made available to WebScripts -->
+					   <enabled>true</enabled>
+					   <loader-trace-enabled>false</loader-trace-enabled>
+					   <messages-object>Alfresco</messages-object>
+					   <packages>
+					       <!-- Add custom packages here -->
+					       <package name="anarchyof" location="js/anarchy" />
+					   </packages>
+						</dojo-pages>
+			      </web-framework>
+			</config>
+			
+	      	<config evaluator="string-compare" condition="DocumentLibrary" replace="false">
+	      		<create-content>
+							
+				</create-content>
+		      	<aspects>
+					<visible>
+
+					</visible>
+				</aspects>
+	      	</config>	
+			      
+		<!-- ********************************** -->
+		<!-- * Actions                        * -->
+		<!-- ********************************** -->			
+		
+		<config evaluator="string-compare" condition="DocLibActions">
+	        <actions>
+	            <action id="document-onlyoffice-edit1" type="link" label="actions.document.onlyoffice-edit">
+	                <param name="href">dp/ws/components/onlyoffice-edit?nodeRef={node.nodeRef}</param>
+	                <param name="target">_blank</param>
+	                <permissions>
+	                    <permission allow="true">Write</permission>
+	                </permissions>
+	            </action>
+	        </actions>
+	        <actionGroups>
+	            <actionGroup id="document-browse">
+	                <action index="90" id="document-onlyoffice-edit1" />
+	            </actionGroup>
+	            <actionGroup id="document-details">
+	                <action index="90" id="document-onlyoffice-edit1" />
+	            </actionGroup>
+	        </actionGroups>
+	    </config>      
+      </configurations>
+    </module>  
+
+  </modules>
+</extension>

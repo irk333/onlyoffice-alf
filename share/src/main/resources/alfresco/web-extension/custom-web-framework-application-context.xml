@@ -16,23 +16,20 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<beans >
-	<!--        
-    <context:component-scan base-package="net.anarchy.alfresco.onlyoffice.webscript" />
-    -->
-     
-	 <bean id="webscript.net.anarchy.alfresco.onlyoffice.components.prepare.get" class="net.anarchy.alfresco.onlyoffice.webscript.Prepare" parent="webscript">
-<!-- 	 
-		<property name="nodeService" ref="nodeService"/>
-		<property name="authenticationService" ref="authenticationService" />
--->		
-	</bean>
-	
-	<bean id="webscript.net.anarchy.alfresco.onlyoffice.components.callback.post" class="net.anarchy.alfresco.onlyoffice.webscript.CallBack" parent="webscript">
-<!-- 	
-		<property name="nodeService" ref="nodeService"/>
-		<property name="authenticationService" ref="authenticationService" />
--->		
-	</bean>
-					
+<beans>
+	<bean id="evaluator.doclib.action.onlyofficeEditMimetype" parent="evaluator.doclib.action.isMimetype">
+        <property name="mimetypes">
+            <list>
+                <value>text/html</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="onlyoffice.custom.resources" class="org.springframework.extensions.surf.util.ResourceBundleBootstrapComponent">
+        <property name="resourceBundles">
+            <list>
+                <value>alfresco.web-extension.messages.onlyoffice</value>
+            </list>
+        </property>
+    </bean>
 </beans>
