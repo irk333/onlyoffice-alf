@@ -6,7 +6,7 @@
 <head>
     <meta http-equiv='Content-Type' content='text/html; charset=utf-8'>
 
-    <title>ONLYOFFICE</title>
+    <title>${docTitle}</title>
 
     <link href="${url.context}/res/components/onlyoffice/onlyoffice.css" type="text/css" rel="stylesheet">
 
@@ -57,12 +57,27 @@ div {
     margin: 0;
     padding: 0;
 }
+
+.fluidMedia {
+    position: relative;
+    padding-top: 0px;
+    height: 1000px;
+    overflow: hidden;
+}
+
+#placeholder {
+    position: absolute;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
     
    	</style>
 </head>
 
 <body>
-    <div>
+    <div class="fluidMedia">
         <div id="placeholder"></div>
     </div>
     <script>
@@ -75,7 +90,7 @@ div {
         {
             type: "desktop",
             width: "100%",
-            height: "600px",
+            height: "100%",
             documentType: "${documentType}",
             document: {
                 title: "${docTitle}",
@@ -94,6 +109,9 @@ div {
                   id: "${userId}",
                   firstname: "${firstName}",
                   lastname: "${lastName}",
+                },
+                customization: {
+                	forcesave: true
                 }
             },
             events: {
